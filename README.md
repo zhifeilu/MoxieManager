@@ -19,6 +19,7 @@ automatically set TinyMCE's image/file browser to use MoxieManager.
 3. Create a symlink in /app/webroot called MoxieManager to ../Plugin/MoxieManager/webroot/moxiemanager
 4. Buy a license and enter the key into first setting of ../Plugin/MoxieManager/webroot/moxiemanager/config.php 
 5. Edit ../Config/croogo.php and add checkAgent = false param to Session configuration
+6. Set ExternalAuthenticator.secret_key in config.php and $secretKey in MoxieManagerController.php to the same value 
 
 The third step bypasses CakePHP's plugin routing when accessing MoxieManager.
 
