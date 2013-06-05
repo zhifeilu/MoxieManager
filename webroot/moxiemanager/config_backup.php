@@ -1,6 +1,6 @@
 <?php
 // General
-$moxieManagerConfig['general.license'] = 'your-license-key';
+$moxieManagerConfig['general.license'] = 'DW3M-ZDJW-6U36-CN6W-NVKH-5OAF-665L-COPT';
 $moxieManagerConfig['general.hidden_tools'] = '';
 $moxieManagerConfig['general.disabled_tools'] = '';
 $moxieManagerConfig['general.plugins'] = 'Favorites,History,Uploaded';
@@ -100,7 +100,7 @@ $moxieManagerConfig['IpAuthenticator.ip_numbers'] = '127.0.0.1';
 
 // ExternalAuthenticator
 $moxieManagerConfig['ExternalAuthenticator.external_auth_url'] = '/moxie_manager/moxie_manager/auth';
-$moxieManagerConfig['ExternalAuthenticator.secret_key'] = 'your-secret-key';
+$moxieManagerConfig['ExternalAuthenticator.secret_key'] = '18sdtadmin40';
 
 // Local filesystem
 $moxieManagerConfig['filesystem.local.wwwroot'] = '';

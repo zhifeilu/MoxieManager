@@ -168,15 +168,13 @@ class MOXMAN_Vfs_FileSystemManager {
 				$path = str_replace("{" . $rootIdx . "}", $this->fileSystems[$rootIdx]->getRootPath(), $path);
 			}
 
-			// Parse scheme and path like db:/ or zip:/
+			// Parse scheme like db, zip,
 			$matches = array();
 			$scheme = "";
 			if (preg_match('/^([a-z0-9]+):\/\/(.+)$/', $path, $matches)) {
 				$scheme = $matches[1];
-				$pathPart = $matches[2];
-				$pathPart = substr($pathPart, 0, 1) !== "/" ? "/" . $pathPart : $pathPart;
-			} else {
-				$pathPart = $path;
+				//$pathPart = $matches[2];
+				//$pathPart = substr($pathPart, 0, 1) !== "/" ? "/" . $pathPart : $pathPart;
 			}
 
 			// Get file from one of the file systems
@@ -189,7 +187,7 @@ class MOXMAN_Vfs_FileSystemManager {
 						$rootPrefix = '/' . $rootPrefix;
 					}
 
-					if ($pathPart === $rootPrefix) {
+					if ($path === $rootPrefix) {
 						return $fileSystem->getRootFile();
 					}
 
@@ -198,15 +196,15 @@ class MOXMAN_Vfs_FileSystemManager {
 					}
 
 					// Check if path matches the beginning of public root
-					if (strpos($pathPart, $rootPrefix) === 0) {
-						$filePath = MOXMAN_Util_PathUtils::combine($fileSystem->getRootPath(), substr($pathPart, strlen($rootPrefix)));
+					if (strpos($path, $rootPrefix) === 0) {
+						$filePath = MOXMAN_Util_PathUtils::combine($fileSystem->getRootPath(), substr($path, strlen($rootPrefix)));
 						$file = $fileSystem->getFile($filePath);
 						return $file;
 					}
 
 					// Check if it matches the absolute root
-					if (strpos($pathPart, $fileSystem->getRootPath()) === 0) {
-						$file = $fileSystem->getFile($pathPart);
+					if (strpos($path, $fileSystem->getRootPath()) === 0) {
+						$file = $fileSystem->getFile($path);
 						return $file;
 					}
 				}

@@ -19,6 +19,9 @@ class MOXMAN_AutoRename_Plugin implements MOXMAN_IPlugin {
 			case MOXMAN_Core_FileActionEventArgs::ADD:
 				$args->setFile($this->renameFile($args->getFile()));
 				break;
+			case MOXMAN_Core_FileActionEventArgs::MOVE:
+				$args->setTargetFile($this->renameFile($args->getTargetFile()));
+				break;
 		}
 	}
 
@@ -31,8 +34,7 @@ class MOXMAN_AutoRename_Plugin implements MOXMAN_IPlugin {
 		$config = $file->getConfig();
 		$autorename = $config->get("autorename.enabled", "");
 		$spacechar = $config->get("autorename.space", "_");
-		$custom = $config->get("autorename.custom_pattern", "");
-		$replace = $config->get("autorename.custom_replace", "");
+		$custom = $config->get("autorename.pattern", "/[^0-9a-z\-_]/i");
 		$overwrite = $config->get("upload.overwrite", false);
 		$lowercase = $config->get("autorename.lowercase", false);
 
@@ -48,15 +50,12 @@ class MOXMAN_AutoRename_Plugin implements MOXMAN_IPlugin {
 		$ext = MOXMAN_Util_PathUtils::getExtension($path);
 		$name = preg_replace("/\.". $ext ."$/i", "", $name);
 
+		$name = str_replace(array('\'', '"'), '', $name);
 		$name = htmlentities($name, ENT_QUOTES, 'UTF-8');
 	    $name = preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $name);
-	    $name = preg_replace(array('~[^0-9a-z]~i', '~-+~'), $spacechar, $name);
+	    $name = preg_replace($custom, $spacechar, $name);
 		$name = str_replace(" ", $spacechar, $name);
 		$name = trim($name);
-
-		if ($custom) {
-			$name = preg_replace($custom, $replace, $name);
-		}
 
 		if ($lowercase) {
 			$ext = strtolower($ext);

@@ -41,6 +41,11 @@ class MOXMAN_Vfs_Local_FileSystem extends MOXMAN_Vfs_FileSystem {
 			return $this->cache->get($path);
 		}
 
+		// Never give access to the mc_access file
+		if ($this->getConfig()->get("filesystem.local.access_file_name") === basename($path)) {
+			throw new MOXMAN_Exception("Can't access the access_file_name.");
+		}
+
 		MOXMAN_Util_PathUtils::verifyPath($path, true);
 
 		// Force the path to an absolute path

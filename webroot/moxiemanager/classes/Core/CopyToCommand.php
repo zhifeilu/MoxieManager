@@ -68,6 +68,14 @@ class MOXMAN_Core_CopyToCommand extends MOXMAN_Core_BaseCommand {
 			);
 		}
 
+		$filter = MOXMAN_Vfs_BasicFileFilter::createFromConfig($config);
+		if ($filter->accept($fromFile, $fromFile->isFile()) !== MOXMAN_Vfs_BasicFileFilter::ACCEPTED) {
+			throw new MOXMAN_Exception(
+				"Invalid file name for: " . $fromFile->getPublicPath(),
+				MOXMAN_Exception::INVALID_FILE_NAME
+			);
+		}
+
 		// Fire before file action event
 		$args = new MOXMAN_Core_FileActionEventArgs(MOXMAN_Core_FileActionEventArgs::COPY, $fromFile);
 		$args->setTargetFile($toFile);

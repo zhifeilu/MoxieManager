@@ -495,7 +495,7 @@ define("moxman/interop/TinyMcePlugin", [
 				zIndex: zIndex,
 				url: editor.documentBaseURI.toAbsolute(value),
 				document_base_url: editor.settings.document_base_url,
-				view: type == "image" ? "thumbs" : "files",
+				view: type == "image" || type == "media" ? "thumbs" : "files",
 				multiple: false,
 				oninsert: function(args) {
 					var fieldElm = win.document.getElementById(id);

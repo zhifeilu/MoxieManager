@@ -1014,7 +1014,7 @@ class MOXMAN_Http_HttpClientResponse {
 }
 
 /**
- * Contains the data to be sent to forms like multipart data. 
+ * Contains the data to be sent to forms like multipart data.
  *
  * @package MOXMAN_Http
  */

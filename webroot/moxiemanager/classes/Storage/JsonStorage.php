@@ -93,13 +93,17 @@ class MOXMAN_Storage_JsonStorage implements MOXMAN_Storage_IStorage {
 
 	/** @ignore */
 	private function save() {
+		if (!is_writable(dirname($this->storagePath))) {
+			return $this;
+		}
+
 		$json = MOXMAN_Util_Json::encode($this->data, $this->config->get("general.debug"));
 
 		// If there is no data to store remove the storage file
 		if ($json === "{}" && file_exists($this->storagePath)) {
 			unlink($this->storagePath);
 		} else {
-			$this->data = file_put_contents($this->storagePath, $json);
+			file_put_contents($this->storagePath, $json);
 		}
 
 		return $this;

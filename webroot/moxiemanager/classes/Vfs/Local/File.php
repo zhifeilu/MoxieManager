@@ -246,6 +246,7 @@ class MOXMAN_Vfs_Local_File extends MOXMAN_Vfs_BaseFile {
 	public function listFilesFiltered(MOXMAN_Vfs_IFileFilter $filter) {
 	 	$files = array();
 	 	$dirs = array();
+		$accessFileName = $this->getConfig()->get("filesystem.local.access_file_name");
 
 		if ($this->isFile()) {
 			return $files;
@@ -254,7 +255,7 @@ class MOXMAN_Vfs_Local_File extends MOXMAN_Vfs_BaseFile {
 		if ($fHnd = opendir($this->internalPath)) {
 			while (false !== ($file = readdir($fHnd))) {
 				// Ignore current and parent
-				if ($file === "." || $file === "..") {
+				if ($file === "." || $file === ".." || $file === $accessFileName) {
 					continue;
 				}
 
@@ -305,7 +306,7 @@ class MOXMAN_Vfs_Local_File extends MOXMAN_Vfs_BaseFile {
 
 				// Ignore files that isn't valid
 				try {
-					MOXMAN_Util_PathUtils::verifyPath($file, true, "dir");
+					MOXMAN_Util_PathUtils::verifyPath($file, true, "file");
 				} catch (Exception $e) {
 					continue;
 				}

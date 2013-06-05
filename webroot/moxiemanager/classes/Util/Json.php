@@ -44,6 +44,11 @@ class MOXMAN_Util_Json {
 					$opts = JSON_PRETTY_PRINT;
 				}
 
+				// TODO: Remove this fix when we drop PHP 5.2 support
+				if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+					return json_encode($obj);
+				}
+
 				return json_encode($obj, $opts);
 			}
 

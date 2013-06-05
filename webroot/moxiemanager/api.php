@@ -7,6 +7,8 @@
 
 require_once('./classes/MOXMAN.php');
 
+define("MOXMAN_API_FILE", __FILE__);
+
 $context = MOXMAN_Http_Context::getCurrent();
 $pluginManager = MOXMAN::getPluginManager();
 foreach ($pluginManager->getAll() as $plugin) {

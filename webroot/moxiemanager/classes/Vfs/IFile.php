@@ -89,7 +89,7 @@ interface MOXMAN_Vfs_IFile {
 	 *
 	 * @return boolean true if the file exists.
 	 */
-	//public function exists();
+	public function exists();
 
 	/**
 	 * Returns true if the file is a directory.
@@ -134,6 +134,13 @@ interface MOXMAN_Vfs_IFile {
 	public function getSize();
 
 	/**
+	 * Returns last modification date in ms as an long.
+	 *
+	 * @return long last modification date in ms as an long.
+	 */
+	public function getLastModified();
+
+	/**
 	 * Copies this file to the specified file instance.
 	 *
 	 * @param MOXMAN_Vfs_IFile $dest File to copy to.
@@ -173,13 +180,6 @@ interface MOXMAN_Vfs_IFile {
 	 * Creates a new directory.
 	 */
 	public function mkdir();
-
-	/**
-	 * Returns last modification date in ms as an long.
-	 *
-	 * @return long last modification date in ms as an long.
-	 */
-	public function getLastModified();
 
 	/**
 	 * Opens a file stream by the specified mode. The default mode is rb.

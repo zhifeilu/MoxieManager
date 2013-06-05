@@ -68,7 +68,7 @@ class MOXMAN_ExternalAuthenticator_Plugin implements MOXMAN_Auth_IAuthenticator 
 
 			return true;
 		} else if (isset($json->error)) {
-		  throw new MOXMAN_Exception($json->error->message . " - ". $json->error->code);
+			throw new MOXMAN_Exception($json->error->message . " - ". $json->error->code);
 		} else {
 			throw new MOXMAN_Exception("Generic unknown error, did not get a proper JSON response from Auth url.");
 		}

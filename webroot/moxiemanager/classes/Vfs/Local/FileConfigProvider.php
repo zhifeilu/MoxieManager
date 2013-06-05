@@ -34,6 +34,8 @@ class MOXMAN_Vfs_Local_FileConfigProvider implements MOXMAN_Vfs_IFileConfigProvi
 		$user = MOXMAN::getUser();
 		$configFiles = array();
 
+		$targetConfigPath = $path . '/' . $mcAccessFile;
+
 		// Collect config files
 		while ($path && strlen($path) >= strlen($root)) {
 			if (file_exists($path . '/' . $mcAccessFile)) {
@@ -58,11 +60,27 @@ class MOXMAN_Vfs_Local_FileConfigProvider implements MOXMAN_Vfs_IFileConfigProvi
 					foreach ($targetGroups as $targetGroup) {
 						if ($user->isMemberOf($targetGroup)) {
 							foreach ($value as $key2 => $value2) {
+								if (strpos($key2, '_') === 0) {
+									if ($targetConfigPath == $configFiles[$i]) {
+										$key2 = substr($key2, 1);
+									} else {
+										continue;
+									}
+								}
+
 								$config->put($key2, $value2);
 							}
 						}
 					}
 				} else {
+					if (strpos($key, '_') === 0) {
+						if ($targetConfigPath == $configFiles[$i]) {
+							$key = substr($key, 1);
+						} else {
+							continue;
+						}
+					}
+
 					$config->put($key, $value);
 				}
 			}

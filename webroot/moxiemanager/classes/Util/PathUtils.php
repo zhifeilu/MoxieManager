@@ -13,6 +13,7 @@
 class MOXMAN_Util_PathUtils {
 	/** @ignore */
 	private static $wwwRoot;
+	private static $sitePaths;
 
 	/**
 	 * Combines two paths into one path.
@@ -195,6 +196,49 @@ class MOXMAN_Util_PathUtils {
 
 		// No path found return empty string
 		return "";
+	}
+
+
+    /**
+     * getSitePaths
+     *
+     * @param string $file   Site absolute path.
+     * @param string $script URL path.
+     *
+     * @return Array With wwwroot and prefix.
+     */
+	public static function getSitePaths($file = "", $script = "") {
+		if (self::$sitePaths && !defined('PHPUNIT')) {
+			return self::$sitePaths;
+		}
+
+		if (!$file && defined("MOXMAN_API_FILE")) {
+			$file = MOXMAN_API_FILE;
+		}
+
+		$file = $file ? $file : $_SERVER["SCRIPT_FILENAME"];
+		$script = $script ? $script : $_SERVER["SCRIPT_NAME"];
+
+		$file = explode("/", self::toUnixPath($file));
+		$script = explode("/", self::toUnixPath($script));
+		$u = count($file) - 1;
+		for($i = count($script) - 1; $i >= 0; $i--) {
+			$val = $file[$u--];
+			if ($val != $script[$i]) {
+				$u++; // To include last chunk
+				break;
+			}
+		}
+
+		$wwwroot = implode("/", array_slice($file, 0, $u + 1));
+		$prefix = implode("/", array_slice($script, 0, $i + 1));
+
+		self::$sitePaths = array(
+			"wwwroot" => $wwwroot,
+			"prefix" => $prefix
+		);
+
+		return self::$sitePaths;
 	}
 
 	/**

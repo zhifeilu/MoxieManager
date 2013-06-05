@@ -100,6 +100,7 @@ class MOXMAN_Core_UploadHandler implements MOXMAN_Http_IHandler {
 					if (!$config->get("upload.overwrite") && !$request->get("overwrite")) {
 						throw new MOXMAN_Exception("Target file exists: " . $file->getPublicPath(), MOXMAN_Exception::FILE_EXISTS);
 					} else {
+						MOXMAN::getPluginManager()->get("core")->deleteThumbnail($file);
 						$file->delete();
 					}
 				}

@@ -35,12 +35,32 @@ class MOXMAN_Vfs_Local_FileUrlResolver implements MOXMAN_Vfs_IFileUrlResolver {
 
 		// Get config items
 		$wwwroot = $config->get("filesystem.local.wwwroot");
-		$prefix = $config->get("filesystem.local.urlprefix", "{proto}://{host}");
+		$prefix = $config->get("filesystem.local.urlprefix");
+		$paths = MOXMAN_Util_PathUtils::getSitePaths();
 
 		// No wwwroot specified try to figure out a wwwroot
 		if (!$wwwroot) {
-			$wwwroot = MOXMAN_Util_PathUtils::getSiteRoot();
+			$wwwroot = $paths["wwwroot"];
+		} else {
+			// Force the www root to an absolute file system path
+			$wwwroot = MOXMAN_Util_PathUtils::toAbsolute(MOXMAN_ROOT, $wwwroot);
 		}
+
+		// Add prefix to URL
+		if ($prefix == "") {
+			$prefix = MOXMAN_Util_PathUtils::combine("{proto}://{host}", $paths["prefix"]);
+		}
+
+		// Replace protocol
+		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") {
+			$prefix = str_replace("{proto}", "https", $prefix);
+		} else {
+			$prefix = str_replace("{proto}", "http", $prefix);
+		}
+
+		// Replace host/port
+		$prefix = str_replace("{host}", $_SERVER['HTTP_HOST'], $prefix);
+		$prefix = str_replace("{port}", $_SERVER['SERVER_PORT'], $prefix);
 
 		// Remove prefix from url
 		if ($prefix && strpos($url, $prefix) === 0) {
@@ -58,7 +78,6 @@ class MOXMAN_Vfs_Local_FileUrlResolver implements MOXMAN_Vfs_IFileUrlResolver {
 				// valid fileSystem root path prefix
 				$path = substr($path, strlen($this->fileSystem->getRootPath()));
 				$path = MOXMAN_Util_PathUtils::combine($this->fileSystem->getRootPath(), $path);
-
 				$file = $this->fileSystem->getFile($path);
 			}
 		}

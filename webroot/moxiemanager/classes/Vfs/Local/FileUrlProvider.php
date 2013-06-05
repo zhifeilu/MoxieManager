@@ -13,7 +13,7 @@
 class MOXMAN_Vfs_Local_FileUrlProvider implements MOXMAN_Vfs_IFileUrlProvider {
 	/**
 	 * Returns an URL for the specified file object.
-	 * 
+	 *
 	 * @param MOXMAN_Vfs_IFile $file File to get the absolute URL for.
 	 * @return String Absolute URL for the specified file.
 	 */
@@ -22,8 +22,23 @@ class MOXMAN_Vfs_Local_FileUrlProvider implements MOXMAN_Vfs_IFileUrlProvider {
 
 		// Get config items
 		$wwwroot = $config->get("filesystem.local.wwwroot");
-		$prefix = $config->get("filesystem.local.urlprefix", "{proto}://{host}");
+		$prefix = $config->get("filesystem.local.urlprefix");
 		$suffix = $config->get("filesystem.local.urlsuffix");
+
+		$paths = MOXMAN_Util_PathUtils::getSitePaths();
+
+		// No wwwroot specified try to figure out a wwwroot
+		if (!$wwwroot) {
+			$wwwroot = $paths["wwwroot"];
+		} else {
+			// Force the www root to an absolute file system path
+			$wwwroot = MOXMAN_Util_PathUtils::toAbsolute(MOXMAN_ROOT, $wwwroot);
+		}
+
+		// Add prefix to URL
+		if ($prefix == "") {
+			$prefix = MOXMAN_Util_PathUtils::combine("{proto}://{host}", $paths["prefix"]);
+		}
 
 		// Replace protocol
 		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") {
@@ -36,21 +51,9 @@ class MOXMAN_Vfs_Local_FileUrlProvider implements MOXMAN_Vfs_IFileUrlProvider {
 		$prefix = str_replace("{host}", $_SERVER['HTTP_HOST'], $prefix);
 		$prefix = str_replace("{port}", $_SERVER['SERVER_PORT'], $prefix);
 
-		// No wwwroot specified try to figure out a wwwroot
-		if (!$wwwroot) {
-			$wwwroot = MOXMAN_Util_PathUtils::getSiteRoot();
-		}
-
-		// Force the www root to an absolute file system path
-		$wwwroot = MOXMAN_Util_PathUtils::toAbsolute(MOXMAN_ROOT, $wwwroot);
-
 		// Insert path into URL
 		$url = substr($file->getPath(), strlen($wwwroot));
-
-		// Add prefix to URL
-		if ($prefix) {
-			$url = MOXMAN_Util_PathUtils::combine($prefix, $url);
-		}
+		$url = MOXMAN_Util_PathUtils::combine($prefix, $url);
 
 		// Add suffix to URL
 		if ($suffix) {

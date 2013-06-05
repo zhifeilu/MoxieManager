@@ -53,7 +53,7 @@ class MoxieManagerController extends MoxieManagerAppController {
  */
 	public function auth() {
 	  Configure::write('debug', 0);
-	  $secretKey = "18sdtadmin40";
+	  $secretKey = "your-secret-key";
 	  if (!$secretKey) {
 	  	die('{"error" : {"message" : "No secret key set.", "code" : 130}}');
 	  }

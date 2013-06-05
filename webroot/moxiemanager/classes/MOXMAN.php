@@ -115,13 +115,6 @@ class MOXMAN {
 	 */
 	public static function getConfig() {
 		if (!self::$config) {
-			// Verify license
-			if (!empty($GLOBALS['moxieManagerConfig'])) {
-				if (!preg_match('/^([0-9A-Z]{4}\-){7}[0-9A-Z]{4}$/', trim($GLOBALS['moxieManagerConfig']["general.license"]))) {
-					throw new MOXMAN_Exception("Invalid license: " . $GLOBALS['moxieManagerConfig']["general.license"]);
-				}
-			}
-
 			self::$config = new MOXMAN_Util_Config($GLOBALS['moxieManagerConfig']);
 			unset($GLOBALS['moxieManagerConfig']);
 		}

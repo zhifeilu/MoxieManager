@@ -70,10 +70,25 @@ class MOXMAN_Core_MoveToCommand extends MOXMAN_Core_BaseCommand {
 			}
 		}
 
+		if (!$fromFile->canWrite()) {
+			throw new MOXMAN_Exception(
+				"No write access to file: " . $fromFile->getPublicPath(),
+				MOXMAN_Exception::NO_WRITE_ACCESS
+			);
+		}
+
 		if (!$toFile->canWrite()) {
 			throw new MOXMAN_Exception(
 				"No write access to file: " . $toFile->getPublicPath(),
 				MOXMAN_Exception::NO_WRITE_ACCESS
+			);
+		}
+
+		$filter = MOXMAN_Vfs_BasicFileFilter::createFromConfig($config);
+		if ($filter->accept($fromFile, $fromFile->isFile()) !== MOXMAN_Vfs_BasicFileFilter::ACCEPTED) {
+			throw new MOXMAN_Exception(
+				"Invalid file name for: " . $fromFile->getPublicPath(),
+				MOXMAN_Exception::INVALID_FILE_NAME
 			);
 		}
 

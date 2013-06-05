@@ -49,7 +49,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets if only files are to be accepted in result.
-	 * 
+	 *
 	 * @param boolean $filesOnly True if only files are to be accepted.
 	 */
 	public function setOnlyFiles($filesOnly) {
@@ -58,7 +58,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets if only dirs are to be accepted in result.
-	 * 
+	 *
 	 * @param boolean $dirsOnly True if only dirs are to be accepted.
 	 */
 	public function setOnlyDirs($dirsOnly) {
@@ -81,7 +81,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets comma separated string list of filenames to exclude.
-	 * 
+	 *
 	 * @param string $files separated string list of filenames to exclude.
 	 */
 	public function setExcludeFiles($files) {
@@ -92,7 +92,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets comma separated string list of filenames to include.
-	 * 
+	 *
 	 * @param string $files separated string list of filenames to include.
 	 */
 	public function setIncludeFiles($files) {
@@ -103,7 +103,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets comma separated string list of foldernames to exclude.
-	 * 
+	 *
 	 * @param string $folders separated string list of foldernames to exclude.
 	 */
 	public function setExcludeFolders($folders) {
@@ -114,7 +114,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets comma separated string list of foldernames to include.
-	 * 
+	 *
 	 * @param string $folders separated string list of foldernames to include.
 	 */
 	public function setIncludeFolders($folders) {
@@ -125,7 +125,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets a regexp pattern that is used to accept files path parts.
-	 * 
+	 *
 	 * @param string $pattern regexp pattern that is used to accept files path parts.
 	 */
 	public function setIncludeFilePattern($pattern) {
@@ -134,7 +134,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets a regexp pattern that is used to deny files path parts.
-	 * 
+	 *
 	 * @param string $pattern regexp pattern that is used to deny files path parts.
 	 */
 	public function setExcludeFilePattern($pattern) {
@@ -143,7 +143,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets a regexp pattern that is used to accept directory path parts.
-	 * 
+	 *
 	 * @param string $pattern regexp pattern that is used to accept directory path parts.
 	 */
 	public function setIncludeDirectoryPattern($pattern) {
@@ -152,7 +152,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets a regexp pattern that is used to deny directory path parts.
-	 * 
+	 *
 	 * @param string $pattern regexp pattern that is used to deny directory path parts.
 	 */
 	public function setExcludeDirectoryPattern($pattern) {
@@ -161,7 +161,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets a wildcard pattern that is used to accept files path parts.
-	 * 
+	 *
 	 * @param string $pattern wildcard pattern that is used to accept files path parts.
 	 */
 	public function setIncludeWildcardPattern($pattern) {
@@ -170,7 +170,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Sets a wildcard pattern that is used to deny files path parts.
-	 * 
+	 *
 	 * @param string $pattern wildcard pattern that is used to deny files path parts.
 	 */
 	public function setExcludeWildcardPattern($pattern) {
@@ -179,7 +179,7 @@ class MOXMAN_Vfs_BasicFileFilter implements MOXMAN_Vfs_IFileFilter {
 
 	/**
 	 * Returns true or false if the file is accepted or not.
-	 * 
+	 *
 	 * @param MOXMAN_Vfs_IFile $file File to grant or deny.
 	 * @param Boolean $isFile Default state if the filter is on an non existing file.
 	 * @return int Accepted or the reson why it failed.

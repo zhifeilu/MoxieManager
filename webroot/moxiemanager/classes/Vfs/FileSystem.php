@@ -240,6 +240,14 @@ abstract class MOXMAN_Vfs_FileSystem {
 	}
 
 	/**
+	 * Returns a MOXMAN_Vfs_IFile instance based on the specified path.
+	 *
+	 * @param string $path Path of the file to retrive.
+	 * @return MOXMAN_Vfs_IFile File instance for the specified path.
+	 */
+	//public abstract function getFile($path);
+
+	/**
 	 * Closes the file system.
 	 */
 	public function close() {

@@ -48,7 +48,7 @@ class MOXMAN_AutoFormat_Plugin implements MOXMAN_IPlugin {
 	 * @param MOXMAN_Vfs_IFile $file File to generate images for.
 	 */
 	public function applyFormat(MOXMAN_Vfs_IFile $file) {
-		if (!$file->exists()) {
+		if (!$file->exists() || !MOXMAN_Media_ImageAlter::canEdit($file)) {
 			return;
 		}
 
