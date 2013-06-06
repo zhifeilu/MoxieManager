@@ -10,4 +10,4 @@ CroogoNav::add('media.children.attachments', array(
 	),
 ));
 
-Croogo::hookHelper('MoxieManager', 'MoxieManager.MoxieManager');
+Croogo::hookHelper('*', 'MoxieManager.MoxieManager');

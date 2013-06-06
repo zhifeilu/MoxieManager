@@ -53,7 +53,7 @@ class MoxieManagerController extends MoxieManagerAppController {
  */
 	public function auth() {
 	  Configure::write('debug', 0);
-	  $secretKey = "your-secret-key";
+	  $secretKey = "18sdtadmin40";
 	  if (!$secretKey) {
 	  	die('{"error" : {"message" : "No secret key set.", "code" : 130}}');
 	  }
@@ -71,7 +71,10 @@ class MoxieManagerController extends MoxieManagerAppController {
 	  
 	  if ($hash == $localHash) {
 	  	// Hard code some rootpath, get something from sessions etc.
-	  	die('{"result" : {"filesystem.rootpath" : "Home=../../../../webroot/uploads"}}');
+	  	die('{"result" : {
+  	  	"filesystem.rootpath" : "../../../../webroot/uploads",
+  	  	"filesystem.local.wwwroot" : "/full/path/to/public_html/webroot/"
+	  	}}');
 	  } else {
 	  	die('{"error" : {"message" : "Error in input.", "code" : 120}}');
 	  }
