@@ -43,5 +43,5 @@ See http://www.moxiemanager.com/documentation/index.php/Configuration for full l
 
 ## Still to do
 
-1. Integrate MoxieManager with CkEditor
-2. Make Media > Attachments link open MoxieManager inline rather than present a Browse button to open an inline popup
+1. Make Media > Attachments link open MoxieManager inline rather than present a Browse button to open an inline popup
+2. Move config options to bootstrap for easier management
