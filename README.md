@@ -1,16 +1,14 @@
 MoxieManager
 ============
 
-Croogo 1.5 plugin for MoxieManager (moxiemanager.com - requires license) replaces core FileManager::attachments
+Croogo 1.5 plugin for MoxieManager (moxiemanager.com - requires license) replaces core FileManager::attachments.
+
+Also automatically integrates with Ckeditor core plugin and my recently 
+released [Tinymce 4 plugin](https://github.com/phpMagpie/Tinymce) for uploading/inserting files and images.
 
 # MoxieManager
 
-Plugin for integrating [MoxieManager](http://moxiemanager.com/) (requires license) into [Croogo](http://croogo.org).
-
-Requires Croogo v1.5 or higher.  
-
-Also, if you install this and my [TinyMCE 4 plugin](https://github.com/phpMagpie/Tinymce) it will 
-automatically set TinyMCE's image/file browser to use MoxieManager.
+Plugin for integrating [MoxieManager](http://moxiemanager.com/) (requires license) into [Croogo](http://croogo.org).  Requires Croogo v1.5 or higher.  
 
 ## Installation
 
@@ -18,8 +16,9 @@ automatically set TinyMCE's image/file browser to use MoxieManager.
 2. Deactivate any other File Manager plugins
 3. Create a symlink in /app/webroot called MoxieManager to ../Plugin/MoxieManager/webroot/moxiemanager
 4. Buy a license and enter the key into first setting of ../Plugin/MoxieManager/webroot/moxiemanager/config.php 
-5. Edit ../Config/croogo.php and add checkAgent = false param to Session configuration
+5. Edit ../Config/croogo.php, adding checkAgent = false param to Session configuration
 6. Set ExternalAuthenticator.secret_key in config.php and $secretKey in MoxieManagerController.php to the same value 
+7. Also in MoxieManagerController.php, change filesystem.local.wwwroot to your full path to webroot
 
 The third step bypasses CakePHP's plugin routing when accessing MoxieManager.
 
