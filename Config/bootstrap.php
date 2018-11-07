@@ -1,5 +1,5 @@
 <?php
-
+df
 CroogoNav::add('media.children.attachments', array(
 	'title' => __d('croogo', 'Attachments'),
 	'url' => array(
